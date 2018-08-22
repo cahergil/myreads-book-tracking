@@ -7,9 +7,7 @@ class BooksApp extends React.Component {
 
     constructor(props) {
         super(props);
-        this.appData = {
-            bookList:[
-
+        this.appData = [
                 {
                   title:'To Kill a Mockingbird',
                   authors: 'Harper Lee',
@@ -53,8 +51,8 @@ class BooksApp extends React.Component {
                     cover:'http://books.google.com/books/content?id=32haAAAAMAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72yckZ5f5bDFVIf7BGPbjA0KYYtlQ__nWB-hI_YZmZ-fScYwFy4O_fWOcPwf-pgv3pPQNJP_sT5J_xOUciD8WaKmevh1rUR-1jk7g1aCD_KeJaOpjVu0cm_11BBIUXdxbFkVMdi&source=gbs_api',
                     shelf: 'Read'
                 }
-            ]
-        };
+            ];
+
 
 
     }/*constructor*/
@@ -85,11 +83,25 @@ class BooksApp extends React.Component {
 
     moveBook = (book,value) =>{
 
-
-         this.setState( (state) =>( {
-
+         this.setState( (state) => ( {
+            bookList : state.bookList.map((b) => {
+                    if (b.title === book.title) {
+                        if (value === 'currentlyReading') {
+                            value = 'Currently reading';
+                        } else if ( value === 'wantToRead') {
+                            value = 'Want to read';
+                        } else if ( value === 'read') {
+                            value = 'Read'
+                        }
+                         b.shelf = value;
+                    }
+                    return b;
+                })
 
          }))
+
+
+
 
     }
 
