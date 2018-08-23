@@ -86,23 +86,34 @@ class BooksApp extends React.Component {
          this.setState( (state) => ( {
             bookList : state.bookList.map((b) => {
                     if (b.title === book.title) {
-                        if (value === 'currentlyReading') {
-                            value = 'Currently reading';
-                        } else if ( value === 'wantToRead') {
-                            value = 'Want to read';
-                        } else if ( value === 'read') {
-                            value = 'Read'
-                        }
-                         b.shelf = value;
+                         b.shelf = this.mapOptionValue(value);
                     }
                     return b;
                 })
 
          }))
+         let tempArray = JSON.parse(localStorage.data);
+         localStorage.data= JSON.stringify(tempArray.map((b) => {
+                if(b.title === book.title) {
+                        b.shelf = this.mapOptionValue(value);
+                }
+                return b;
+         }));
+         /*console.log(JSON.stringify(this.state.bookList))*/
 
 
 
 
+
+
+    }
+
+    mapOptionValue = (value) => {
+
+        if(value === 'currentlyReading') return 'Currently reading';
+        if(value === 'wantToRead') return 'Want to read';
+        if(value === 'read') return 'Read';
+        if(value === 'none') return 'none';
     }
 
     render() {

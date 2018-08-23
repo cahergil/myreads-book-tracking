@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 class Bookshelf extends Component {
 
     mapShelfToOption = (name) => {
+
         if(name === 'Currently reading') return 'currentlyReading';
         if(name === 'Want to read') return 'wantToRead';
         if(name === 'Read') return 'read';
