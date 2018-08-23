@@ -92,6 +92,7 @@ class BooksApp extends React.Component {
                 })
 
          }))
+         /* store the list in local storage*/
          let tempArray = JSON.parse(localStorage.data);
          localStorage.data= JSON.stringify(tempArray.map((b) => {
                 if(b.title === book.title) {
@@ -99,7 +100,7 @@ class BooksApp extends React.Component {
                 }
                 return b;
          }));
-         /*console.log(JSON.stringify(this.state.bookList))*/
+
 
 
 
