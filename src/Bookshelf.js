@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 
 class Bookshelf extends Component {
+
+    static propTypes = {
+        list: PropTypes.array.isRequired,
+        onMoveBook: PropTypes.func.isRequired,
+        shelf: PropTypes.string.isRequired
+
+    }
+
+
 
     mapShelfToOption = (name) => {
 
