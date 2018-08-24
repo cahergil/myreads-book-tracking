@@ -41,7 +41,7 @@ class Bookshelf extends Component {
                      <li key={book.title}>
                        <div className="book">
                          <div className="book-top">
-                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.cover})` }}></div>
+                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.cover? book.cover:''})` }}></div>
                            <div className="book-shelf-changer">
                              <select id="selector" onChange={(e) => onMoveBook(book,e.target.value) } value={this.mapShelfToOption(shelf) } >
                                     <option value="move" disabled>Move to...</option>
