@@ -22,7 +22,7 @@ class SearchBooks extends Component {
             BooksAPI.search(query).then((response) => {
                 console.log(response);
                 this.setState({books: response})
-            })
+            }).catch( e => console.log('error:',e));
         } else {
             this.setState({books: []})
         }
@@ -59,7 +59,7 @@ class SearchBooks extends Component {
 
                     this.state.books.map( (book) => (
 
-                        <li key={book.title}>
+                        <li key={book.id}>
                           <div className="book">
                             <div className="book-top">
                               <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
