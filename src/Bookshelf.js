@@ -24,15 +24,13 @@ class Bookshelf extends Component {
 
 
 
-
-
     render() {
 
-         let books = this.props.list;
-         const shelf = this.props.shelf;
-         const onMoveBook = this.props.onMoveBook;
+        let books = this.props.list;
+        const shelf = this.props.shelf;
+        const onMoveBook = this.props.onMoveBook;
+        books = books.filter((book) => book.shelf === shelf);
 
-         books = books.filter((book) =>book.shelf === shelf);
 
         return (
         <div className="bookshelf">
@@ -45,9 +43,9 @@ class Bookshelf extends Component {
                          <div className="book-top">
                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.cover})` }}></div>
                            <div className="book-shelf-changer">
-                             <select onChange={(e) => onMoveBook(book,e.target.value) } value={this.mapShelfToOption(shelf) } >
+                             <select id="selector" onChange={(e) => onMoveBook(book,e.target.value) } value={this.mapShelfToOption(shelf) } >
                                     <option value="move" disabled>Move to...</option>
-                                    <option value="currentlyReading" >Currently Reading</option>
+                                    <option value="currentlyReading">Currently Reading</option>
                                     <option value="wantToRead" >Want to Read</option>
                                     <option value="read" >Read</option>
                                     <option value="none" >None</option>
