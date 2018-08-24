@@ -16,15 +16,28 @@ class SearchBooks extends Component {
     }
 
     updateQuery = (query) => {
-        this.setState({query: query})
 
-        if(query !== '') {
-            BooksAPI.search(query).then((response) => {
-                console.log(response);
-                this.setState({books: response})
-            }).catch( e => console.log('error:',e));
+        // query !== ''
+        if(query) {
+            BooksAPI.search(query)
+                .then((response) => {
+                     console.log(response);
+                    // if thre is at least a match, response is an array
+                    if (Array.isArray(response)) {
+                        this.setState({ books: response, query: query })
+                    } else { // else, response is an error object (error:, items:[])
+                        console.log(response.error);
+                        this.setState({ books: response.items, query: query })
+                    }
+                })
+                .catch( (error) => {
+                    console.log('error caught',error);
+                })
+
+
         } else {
-            this.setState({books: []})
+            this.setState({ books: [],query: query })
+
         }
     }
 
@@ -53,9 +66,8 @@ class SearchBooks extends Component {
                 </div>
               </div>
               <div className="search-books-results">
-              <div>{this.state.query}</div>
                 <ol className="books-grid">
-                {
+                 {
 
                     this.state.books.map( (book) => (
 
