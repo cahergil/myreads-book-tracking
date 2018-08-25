@@ -1,5 +1,5 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import './App.css'
@@ -15,44 +15,44 @@ class BooksApp extends React.Component {
                   title:'To Kill a Mockingbird',
                   authors: ['Harper Lee'],
                   cover: 'http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api',
-                  shelf: 'Currently reading'
+                  shelf: 'currentlyReading'
                 },
                 {
                   title: 'Enders Game',
                   authors: ['Orson Scott Card'],
                   cover: 'http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api',
-                  shelf: 'Currently reading'
+                  shelf: 'currentlyReading'
                 },
                 {
                   title:'1776',
                   authors: ['David McCullough'],
                   cover: 'http://books.google.com/books/content?id=uu1mC6zWNTwC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73pGHfBNSsJG9Y8kRBpmLUft9O4BfItHioHolWNKOdLavw-SLcXADy3CPAfJ0_qMb18RmCa7Ds1cTdpM3dxAGJs8zfCfm8c6ggBIjzKT7XR5FIB53HHOhnsT7a0Cc-PpneWq9zX&source=gbs_api',
-                  shelf: 'Want to read'
+                  shelf: 'wantToRead'
                 },
                 {
                   title: 'Harry Potter and the Sorcerers Stone',
                   authors:['Orson Scott Card'],
                   cover: 'http://books.google.com/books/content?id=wrOQLV6xB-wC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72G3gA5A-Ka8XjOZGDFLAoUeMQBqZ9y-LCspZ2dzJTugcOcJ4C7FP0tDA8s1h9f480ISXuvYhA_ZpdvRArUL-mZyD4WW7CHyEqHYq9D3kGnrZCNiqxSRhry8TiFDCMWP61ujflB&source=gbs_api',
-                  shelf: 'Want to read'
+                  shelf: 'wantToRead'
 
                 },
                 {
                     title: 'The Hobbit',
                     authors: ['J.R.R. Tolkien'],
                     cover: 'http://books.google.com/books/content?id=pD6arNyKyi8C&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE70Rw0CCwNZh0SsYpQTkMbvz23npqWeUoJvVbi_gXla2m2ie_ReMWPl0xoU8Quy9fk0Zhb3szmwe8cTe4k7DAbfQ45FEzr9T7Lk0XhVpEPBvwUAztOBJ6Y0QPZylo4VbB7K5iRSk&source=gbs_api',
-                    shelf: 'Read'
+                    shelf: 'read'
                 },
                 {
                     title:'Oh, the Places You will Go!',
                     authors: ['Seuss'],
                     cover: 'http://books.google.com/books/content?id=1q_xAwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE712CA0cBYP8VKbEcIVEuFJRdX1k30rjLM29Y-dw_qU1urEZ2cQ42La3Jkw6KmzMmXIoLTr50SWTpw6VOGq1leINsnTdLc_S5a5sn9Hao2t5YT7Ax1RqtQDiPNHIyXP46Rrw3aL8&source=gbs_api',
-                    shelf: 'Read'
+                    shelf: 'read'
                 },
                 {
                     title:'The Adventures of Tom Sayer',
                     authors: ['Mark Twain'],
                     cover:'http://books.google.com/books/content?id=32haAAAAMAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72yckZ5f5bDFVIf7BGPbjA0KYYtlQ__nWB-hI_YZmZ-fScYwFy4O_fWOcPwf-pgv3pPQNJP_sT5J_xOUciD8WaKmevh1rUR-1jk7g1aCD_KeJaOpjVu0cm_11BBIUXdxbFkVMdi&source=gbs_api',
-                    shelf: 'Read'
+                    shelf: 'read'
                 }
             ];
 
@@ -68,6 +68,8 @@ class BooksApp extends React.Component {
         }
 
         this.setState({bookList: JSON.parse(localStorage.data)});
+        // let myArray = BooksAPI.getAll().then((books))
+        // console.log(myArray);
 
     }
 
@@ -78,12 +80,12 @@ class BooksApp extends React.Component {
 
     }
 
-    moveBook = (book,value) =>{
+    moveBook = (book,toShelf) => {
 
          this.setState( (state) => ( {
             bookList : state.bookList.map((b) => {
                     if (b.title === book.title) {
-                         b.shelf = this.mapOptionValue(value);
+                         b.shelf = toShelf;
                     }
                     return b;
                 })
@@ -93,7 +95,7 @@ class BooksApp extends React.Component {
          let tempArray = JSON.parse(localStorage.data);
          localStorage.data= JSON.stringify(tempArray.map((b) => {
                 if(b.title === book.title) {
-                        b.shelf = this.mapOptionValue(value);
+                        b.shelf = toShelf;
                 }
                 return b;
          }));
@@ -106,13 +108,7 @@ class BooksApp extends React.Component {
 
     }
 
-    mapOptionValue = (value) => {
 
-        if(value === 'currentlyReading') return 'Currently reading';
-        if(value === 'wantToRead') return 'Want to read';
-        if(value === 'read') return 'Read';
-        if(value === 'none') return 'none';
-    }
 
     render() {
         return (
@@ -131,19 +127,19 @@ class BooksApp extends React.Component {
                         <div>
                           <Bookshelf
                               onMoveBook={this.moveBook}
-                              shelf={'Currently reading'}
+                              shelf={'currentlyReading'}
                               list={this.state.bookList}
                           />
 
                           <Bookshelf
                               onMoveBook={this.moveBook}
-                              shelf={'Want to read'}
+                              shelf={'wantToRead'}
                               list={this.state.bookList}
                           />
 
                           <Bookshelf
                               onMoveBook={this.moveBook}
-                              shelf={'Read'}
+                              shelf={'read'}
                               list={this.state.bookList}
                           />
                         </div>
