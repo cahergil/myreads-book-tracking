@@ -5,6 +5,9 @@ import * as BooksAPI from './BooksAPI'
 
 class SearchBooks extends Component {
 
+
+
+
     state = {
         query: '',
         books: []
@@ -17,17 +20,17 @@ class SearchBooks extends Component {
 
     updateQuery = (query) => {
 
-        // query !== ''
+        this.setState({query: query})
         if(query) {
-            BooksAPI.search(query)
+            BooksAPI.search(query.trim())
                 .then((response) => {
                      console.log(response);
-                    // if thre is at least a match, response is an array
+                    // if there is at least one match, response is an array
                     if (Array.isArray(response)) {
-                        this.setState({ books: response, query: query })
+                        this.setState({ books: response })
                     } else { // else, response is an error object (error:, items:[])
                         console.log(response.error);
-                        this.setState({ books: response.items, query: query })
+                        this.setState({ books: response.items })
                     }
                 })
                 .catch( (error) => {
@@ -36,7 +39,7 @@ class SearchBooks extends Component {
 
 
         } else {
-            this.setState({ books: [],query: query })
+            this.setState({ books: [] })
 
         }
     }
