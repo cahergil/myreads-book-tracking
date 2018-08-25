@@ -34,15 +34,10 @@ class BooksApp extends React.Component {
                 })
 
          }))
-         /* store the list in local storage*/
-         // let tempArray = JSON.parse(localStorage.data);
-         // localStorage.data= JSON.stringify(tempArray.map((b) => {
-         //        if(b.title === book.title) {
-         //                b.shelf = toShelf;
-         //        }
-         //        return b;
-         // }));
 
+         BooksAPI.update(book,toShelf)
+         .then(JSONObject => console.log(JSONObject))
+         .catch( (error) => console.log('Could not update book to proper shelf:',error))
     }
 
 
