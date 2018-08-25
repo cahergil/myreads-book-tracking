@@ -46,6 +46,10 @@ class SearchBooks extends Component {
 
 
     render() {
+
+        let bookList = this.props.list;
+        console.log(bookList);
+
         return (
             <div className="search-books">
               <div className="search-books-bar">
@@ -74,13 +78,14 @@ class SearchBooks extends Component {
 
                     this.state.books.map( (book) => (
 
+
                         <li key={book.id}>
                           <div className="book">
                             <div className="book-top">
                               <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:
                                   `url(${book.imageLinks? book.imageLinks.smallThumbnail:''} )` }}></div>
                               <div className="book-shelf-changer">
-                                <select >
+                                <select value={ (bookList.filter( (b) => b.id === book.id ))[0]?(bookList.filter( (b) => b.id === book.id ))[0].shelf:'none' }>
                                        <option value="move" disabled>Move to...</option>
                                        <option value="currentlyReading" >Currently Reading</option>
                                        <option value="wantToRead" >Want to Read</option>
