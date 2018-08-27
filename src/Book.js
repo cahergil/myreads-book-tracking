@@ -12,7 +12,7 @@ render() {
     const shelf = this.props.shelf;
     return (
 
-            <li key={book.title}>
+
               <div className="book">
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:
@@ -31,7 +31,7 @@ render() {
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">{book.authors ? book.authors.join(',') : 'not available'}</div>
               </div>
-            </li>
+
         )
     }
 

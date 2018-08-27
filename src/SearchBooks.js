@@ -20,7 +20,7 @@ class SearchBooks extends Component {
         if(query) {
             BooksAPI.search(query.trim())
                 .then((response) => {
-                     console.log(response);
+                     // console.log(response);
                     // if there is at least one match, response is an array
                     if (Array.isArray(response)) {
                         this.setState({ books: response })
@@ -51,7 +51,7 @@ class SearchBooks extends Component {
 
         let bookList = this.props.list;
         const onMoveBook = this.props.onMoveBook;
-        console.log(bookList);
+        // console.log(bookList);
 
         return (
             <div className="search-books">
@@ -80,13 +80,13 @@ class SearchBooks extends Component {
                  {
 
                     this.state.books.map( (book) => (
+                        <li key={book.id}>
                         <Book
                             book={book}
                             onMoveBook={onMoveBook}
                             shelf={this.findShelfValue(bookList,book)}
-
                         />
-
+                        </li>
                     ))
                 }
                 </ol>

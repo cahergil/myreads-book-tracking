@@ -42,9 +42,9 @@ class BooksApp extends React.Component {
 
     addBook = (book,toShelf) => {
 
-        this.setState( (state) => ({
-            bookList: this.addBookToShelf(book,toShelf)
-        }))
+
+        this.addBookToShelf(book,toShelf)
+
 
         BooksAPI.update(book,toShelf)
         .then(JSONObject => console.log(JSONObject))
@@ -54,10 +54,21 @@ class BooksApp extends React.Component {
 
     addBookToShelf = (book,toShelf) => {
 
-        const tempArray = [...this.state.bookList];
-        book.shelf = toShelf;
-        tempArray.push(book);
-        return tempArray;
+        // if book exits, just change shelf
+        if(this.state.bookList.find((b) => b.id === book.id)) {
+            console.log('the book already exists');
+            this.moveBook(book,toShelf);
+        } else {
+            // books does't exist in library
+            const tempArray = [...this.state.bookList];
+            book.shelf = toShelf;
+            tempArray.push(book);
+            tempArray;
+            this.setState( { bookList: tempArray})
+        }
+
+
+
     }
 
     render() {
