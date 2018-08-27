@@ -1,6 +1,8 @@
 {
 
-  "homepage": "http://cahergil.github.io/myreads-book-tracking",
+  "homepage": "https://cahergil.github.io/myreads-book-tracking",
+  "name": "myreads-book-tracking",
+  "private": true,
   "dependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
