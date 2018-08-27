@@ -256,3 +256,11 @@ body, .app {
 
   font-size: 0.8em;
 }
+
+
+.bookshelf-status {
+
+    color: #ccc;
+    padding-top: 30px;
+    font-weight: 300;
+}
