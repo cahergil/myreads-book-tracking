@@ -59,7 +59,7 @@ class BooksApp extends React.Component {
             console.log('the book already exists');
             this.moveBook(book,toShelf);
         } else {
-            // books does't exist in library
+            // book doesn't exist in library
             const tempArray = [...this.state.bookList];
             book.shelf = toShelf;
             tempArray.push(book);
