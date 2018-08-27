@@ -18,7 +18,7 @@ To add a book to a certain shelf there is a plus button that once pressed reveal
 
 ## Getting started
 
-
+* Clone or download this repo
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
