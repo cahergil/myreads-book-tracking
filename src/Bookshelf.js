@@ -12,16 +12,6 @@ class Bookshelf extends Component {
     }
 
 
-
-    // mapShelfToOption = (name) => {
-    //
-    //     if(name === 'Currently reading') return 'currentlyReading';
-    //     if(name === 'Want to read') return 'wantToRead';
-    //     if(name === 'Read') return 'read';
-    //     if(name === 'none') return 'none';
-    //
-    // };
-
     mapShelves = (value) => {
 
         if(value === 'currentlyReading') return 'Currently reading';
@@ -61,7 +51,7 @@ class Bookshelf extends Component {
                            </div>
                          </div>
                          <div className="book-title">{book.title}</div>
-                         <div className="book-authors">{book.authors ? book.authors.join(',') : 'unknown'}</div>
+                         <div className="book-authors">{book.authors ? book.authors.join(',') : 'not available'}</div>
                        </div>
                      </li>
                  )

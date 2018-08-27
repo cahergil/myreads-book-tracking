@@ -48,6 +48,7 @@ class SearchBooks extends Component {
     render() {
 
         let bookList = this.props.list;
+        const onAddBook = this.props.onAddBook;
         console.log(bookList);
 
         return (
@@ -85,7 +86,8 @@ class SearchBooks extends Component {
                               <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:
                                   `url(${book.imageLinks? book.imageLinks.smallThumbnail:''} )` }}></div>
                               <div className="book-shelf-changer">
-                                <select value={ (bookList.filter( (b) => b.id === book.id ))[0]?(bookList.filter( (b) => b.id === book.id ))[0].shelf:'none' }>
+                                <select onChange={(e) => onAddBook(book,e.target.value) }
+                                    value={ (bookList.filter( (b) => b.id === book.id ))[0]?(bookList.filter( (b) => b.id === book.id ))[0].shelf:'none' }>
                                        <option value="move" disabled>Move to...</option>
                                        <option value="currentlyReading" >Currently Reading</option>
                                        <option value="wantToRead" >Want to Read</option>

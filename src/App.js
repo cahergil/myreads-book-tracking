@@ -36,11 +36,29 @@ class BooksApp extends React.Component {
          }))
 
          BooksAPI.update(book,toShelf)
-         .then(JSONObject => console.log(JSONObject))
-         .catch( (error) => console.log('Could not update book to proper shelf:',error))
+         .then( (JSONObject) => console.log(JSONObject) )
+         .catch( (error) => console.log('Could not update book to proper shelf:',error) )
     }
 
+    addBook = (book,toShelf) => {
 
+        this.setState( (state) => ({
+            bookList: this.addBookToShelf(book,toShelf)
+        }))
+
+        BooksAPI.update(book,toShelf)
+        .then(JSONObject => console.log(JSONObject))
+        .catch( (error) => console.log('Could not update book to proper shelf:',error))
+
+    }
+
+    addBookToShelf = (book,toShelf) => {
+
+        const tempArray = [...this.state.bookList];
+        book.shelf = toShelf;
+        tempArray.push(book);
+        return tempArray;
+    }
 
     render() {
         return (
@@ -48,7 +66,11 @@ class BooksApp extends React.Component {
 
                 <Route path="/search" render={ () =>(
 
-                    <SearchBooks list={this.state.bookList}/>
+                    <SearchBooks
+                        onAddBook={this.addBook}
+                        list={this.state.bookList}
+
+                    />
 
                 )}
                 />
