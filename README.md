@@ -1,8 +1,8 @@
-# MyReads: A Book Tracking App
+# MyReads: A Book Tracking App with React
 
 ### introduction
 
-The purpose of this project is to practice <strong>React</strong> and single page applications.
+The purpose of this project is to practice **React** and single page applications.
 The application represents a sort of personal library with 3 shelves to categorize the books:
 - Currently reading
 - Want to read
