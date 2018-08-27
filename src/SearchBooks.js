@@ -13,10 +13,6 @@ class SearchBooks extends Component {
         books: []
     }
 
-    componentDidMount() {
-
-
-    }
 
     updateQuery = (query) => {
 
@@ -44,6 +40,12 @@ class SearchBooks extends Component {
         }
     }
 
+    findShelfValue = (bookList,book) => {
+
+
+        const foundBook = bookList.find( (b) => b.id ==book.id);
+        return foundBook ? foundBook.shelf: 'none';
+    }
 
     render() {
 
@@ -81,7 +83,7 @@ class SearchBooks extends Component {
                         <Book
                             book={book}
                             onMoveBook={onMoveBook}
-                            shelf={(bookList.filter( (b) => b.id === book.id ))[0]?(bookList.filter( (b) => b.id === book.id ))[0].shelf:'none'}
+                            shelf={this.findShelfValue(bookList,book)}
 
                         />
 
