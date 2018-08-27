@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
-
+import Book from './Book'
 
 class SearchBooks extends Component {
 
@@ -48,7 +48,7 @@ class SearchBooks extends Component {
     render() {
 
         let bookList = this.props.list;
-        const onAddBook = this.props.onAddBook;
+        const onMoveBook = this.props.onMoveBook;
         console.log(bookList);
 
         return (
@@ -78,29 +78,13 @@ class SearchBooks extends Component {
                  {
 
                     this.state.books.map( (book) => (
+                        <Book
+                            book={book}
+                            onMoveBook={onMoveBook}
+                            shelf={(bookList.filter( (b) => b.id === book.id ))[0]?(bookList.filter( (b) => b.id === book.id ))[0].shelf:'none'}
 
+                        />
 
-                        <li key={book.id}>
-                          <div className="book">
-                            <div className="book-top">
-                              <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:
-                                  `url(${book.imageLinks? book.imageLinks.smallThumbnail:''} )` }}></div>
-                              <div className="book-shelf-changer">
-                                <select onChange={(e) => onAddBook(book,e.target.value) }
-                                    value={ (bookList.filter( (b) => b.id === book.id ))[0]?(bookList.filter( (b) => b.id === book.id ))[0].shelf:'none' }>
-                                       <option value="move" disabled>Move to...</option>
-                                       <option value="currentlyReading" >Currently Reading</option>
-                                       <option value="wantToRead" >Want to Read</option>
-                                       <option value="read" >Read</option>
-                                       <option value="none" >None</option>
-
-                                </select>
-                              </div>
-                            </div>
-                            <div className="book-title">{book.title}</div>
-                            <div className="book-authors">{book.authors ? book.authors.join(',') : 'unknown'}</div>
-                          </div>
-                        </li>
                     ))
                 }
                 </ol>
