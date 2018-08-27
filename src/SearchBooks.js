@@ -2,25 +2,33 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
+import { debounce } from "throttle-debounce"
 
 class SearchBooks extends Component {
 
+    constructor(props) {
 
+        super(props);
+        this.state = {query:'', books:[]};
+        this.doSearchDebounced = debounce(1000,this.doSearch);
 
-
-    state = {
-        query: '',
-        books: []
     }
 
 
     updateQuery = (query) => {
 
-        this.setState({query: query})
+        this.setState({query: query},() => {
+            this.doSearchDebounced(this.state.query);
+        });
+
+    }
+
+    doSearch = (query) => {
+
         if(query) {
             BooksAPI.search(query.trim())
                 .then((response) => {
-                     // console.log(response);
+                      console.log(response);
                     // if there is at least one match, response is an array
                     if (Array.isArray(response)) {
                         this.setState({ books: response })
@@ -38,9 +46,8 @@ class SearchBooks extends Component {
             this.setState({ books: [] })
 
         }
+
     }
-
-
 
 
 
