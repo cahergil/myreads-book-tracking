@@ -26,7 +26,8 @@ The app will be running at `localhost:3000`
 
 ## Live App
 
-You can find the final app in the following link:
+You can find the final app in the following link: [My Reads book tracking app](https://cahergil.github.io/myreads-book-tracking/)
+
 
 ## Backend Server
 
