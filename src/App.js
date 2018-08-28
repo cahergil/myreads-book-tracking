@@ -63,7 +63,6 @@ class BooksApp extends React.Component {
             const tempArray = [...this.state.bookList];
             book.shelf = toShelf;
             tempArray.push(book);
-            tempArray;
             this.setState( { bookList: tempArray})
         }
 

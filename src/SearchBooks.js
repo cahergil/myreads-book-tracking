@@ -54,7 +54,7 @@ class SearchBooks extends Component {
     findShelfValue = (bookList,book) => {
 
 
-        const foundBook = bookList.find( (b) => b.id ==book.id);
+        const foundBook = bookList.find( (b) => b.id === book.id);
         return foundBook ? foundBook.shelf: 'none';
     }
 
